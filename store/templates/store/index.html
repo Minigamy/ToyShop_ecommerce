@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }} :: {{ block.super }}{% endblock %}
+
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+
+{% if prod_cat %}
+<div class="row">
+    {% for cat in prod_cat %}
+    <div class="col-4">
+        <div class="card mb-3">
+            <div class="card-header">
+                <a href="{{ cat.get_absolute_url }}">{{ cat.title }}</a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Картинка категории</h5>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
+</div>
+
+{% else %}
+
+<div class="row">
+    {% for item in products %}
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                <a href="{{ item.get_absolute_url }}">{{ item.name }}</a>
+            </div>
+            <div class="card-body" align="center">
+
+                <a href="{{ item.get_absolute_url }}">
+                    <img width="300" src="{% if item.image %}{{ item.image.url }}{% else %}Место для картинки по умолчанию{% endif %}">
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }} :: {{ block.super }}{% endblock %}
+
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="card mb-3">
+    <div class="card-header">
+        <h6>{{ product.name }}</h6><span>Цена: {{ product.price }} рублей</span>
+        <p>
+            {% if product.available %}
+            Есть в наличии
+            {% else %}
+            Нет в наличии
+            {% endif %}
+        </p>
+        <p>Артикул: {{ product.article }}</p>
+    </div>
+    <div class="card-body">
+        <a href="{{ product.get_absolute_url }}">
+            <img width="600"
+                 src="{% if product.image %}{{ product.image.url }}{% else %}Место для картинки по умолчанию{% endif %}">
+        </a>
+        <h5 class="card-title">Описание</h5>
+        <p class="card-text">{{ product.description|safe }}</p>
+
+
+        <h5 class="card-title">Характеристики</h5>
+        <p class="card-text">Страна производитель: {{ product.manufacturer_country }}</p>
+
+        {% if product.brand %}
+        <p class="card-text">Бренд: <a href="{{ product.brand.get_absolute_url }}">{{ product.brand.title }}</a></p>
+        {% endif %}
+
+        {% if product.package_size %}
+        <p class="card-text">Размер упаковки: {{ product.package_size }}</p>
+        {% endif %}
+
+        {% if product.weight %}
+        <p class="card-text">Вес: {{ product.weight }}</p>
+        {% endif %}
+
+
+    </div>
+    <div class="card-footer text-muted">
+        {{ product.created|date:"Y.m.d H:i:s" }}
+    </div>
+
+    <p class="price">${{ product.price }}</p>
+    <form action="{% url 'cart_add' product.id %}" method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Add to cart">
+    </form>
+
+</div>
+
+{% endblock %}

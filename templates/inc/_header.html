@@ -1,0 +1,43 @@
+
+<header class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <a href="/"><h3>Главная страница</h3></a>
+            </div>
+
+            <div class="col-sm-4" align="right">
+                <div class="cart">
+                    {% with total_items=cart|length %}
+                    {% if cart|length > 0 %}
+                    Your cart:
+                    <a href="{% url 'cart_detail' %}">
+                        {{ total_items }} item{{ total_items|pluralize }},
+                        ${{ cart.get_total_price }}
+                    </a>
+                    {% else %}
+                    Your cart is empty.
+                    {% endif %}
+                    {% endwith %}
+                </div>
+
+            </div>
+
+            <div class="col-sm-2">
+
+                {% if request.user.is_authenticated %}
+
+                <div class="last">{{ user.username }} | <a href="{% url 'logout' %}">Выйти</a></div>
+
+                {% else %}
+
+                <div class="last"><a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a>
+                </div>
+
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+    <hr>
+</header>
