@@ -3,6 +3,8 @@ from django.urls import path
 from store.authorization.authorization import LoginUser, logout_user, RegisterUser
 from store.views import Home, ProductsByCategory, GetProduct, ProductsByBrand
 
+app_name = 'store'
+
 urlpatterns = [
     path('', Home.as_view(), name='home'),
 
