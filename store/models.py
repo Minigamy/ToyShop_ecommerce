@@ -9,7 +9,7 @@ class Category(models.Model):
     parent_category = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
 
     def get_absolute_url(self):
-        return reverse('category', kwargs={"slug": self.slug})
+        return reverse('store:category', kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.title
@@ -48,7 +48,7 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
-        return reverse('product', kwargs={"slug": self.slug})
+        return reverse('store:product', kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.name
@@ -63,7 +63,7 @@ class Brand(models.Model):
     slug = models.SlugField(max_length=255, verbose_name='URL', unique=True)
 
     def get_absolute_url(self):
-        return reverse('brand', kwargs={"slug": self.slug})
+        return reverse('store:brand', kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.title

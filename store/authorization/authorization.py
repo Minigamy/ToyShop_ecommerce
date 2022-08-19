@@ -9,13 +9,13 @@ from django.views.generic import CreateView
 class RegisterUser(CreateView):
     form_class = UserCreationForm
     template_name = 'store/auth/register.html'
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('store:login')
 
     """ При успешной регистрации вызывается данный метод и пользователь сразу же авторизуется и перенаправляется на home """
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('home')
+        return redirect('store:home')
 
 
 
@@ -25,9 +25,9 @@ class LoginUser(LoginView):
 
     ''' если пользователь успешно авторизовался, то вызывается данный метод, который перенаправляет на указанную страницу. '''
     def get_success_url(self):
-        return reverse_lazy('home')
+        return reverse_lazy('store:home')
 
 
 def logout_user(request):
     logout(request)
-    return redirect('login')
+    return redirect('store:login')
