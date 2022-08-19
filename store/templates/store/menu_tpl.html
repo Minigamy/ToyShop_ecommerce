@@ -5,38 +5,27 @@
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
 {% comment %}
 <div class="{{ menu_class }}">
 
 
-      {% for category in categories %}
+    {% for category in categories %}
 
-      <div class="nav-item dropdown">
+    <div class="nav-item dropdown">
 
-          <a href="#" class="nav-link" data-toggle="dropdown">{{category}}<i
-                  class="fa fa-angle-down float-right mt-1"></i></a>
+        <a href="#" class="nav-link" data-toggle="dropdown">{{category}}<i
+                class="fa fa-angle-down float-right mt-1"></i></a>
 
-          <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+        <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
 
-              {% for subcategory in category.category_set.all %}
-              <a href="{{ subcategory.get_absolute_url }}" class="dropdown-item">{{ subcategory }}</a>
-              {% endfor %}
+            {% for subcategory in category.category_set.all %}
+            <a href="{{ subcategory.get_absolute_url }}" class="dropdown-item">{{ subcategory }}</a>
+            {% endfor %}
 
-          </div>
+        </div>
 
-      </div>
-      {% endfor %}
+    </div>
+    {% endfor %}
 
 </div>
 

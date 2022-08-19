@@ -12,10 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -27,7 +25,6 @@ SECRET_KEY = 'django-insecure-zsmy%&$2+r&$)$a4*_0^dgj^4ezp3)53s1s7@w^b9-&=!%l@1)
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -44,6 +41,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'cart',
     'orders.apps.OrdersConfig',
+    'payment.apps.PaymentConfig',
 ]
 
 MIDDLEWARE = [
@@ -79,7 +77,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'conf.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -89,7 +86,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -109,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -120,7 +115,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -136,17 +130,12 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-
 CART_SESSION_ID = 'cart'
-
-
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
@@ -166,8 +155,6 @@ EMAIL_HOST_PASSWORD = "9G6KZb5tDPTqxwFrW7eU"
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
-
-
 # Настройка Celery
 CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
 
@@ -176,7 +163,22 @@ CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
 # CELERY_TASK_SERIALIZER = 'json'
 
 
+# Payment gateway Braintree settings
+BRAINTREE_MERCHANT_ID = 'drd5c72wpncs3v3b'
+BRAINTREE_PUBLIC_KEY = 'mx2zyqfn3q9wwrxf'
+BRAINTREE_PRIVATE_KEY = '22b702d0be8fa480794bbfa2f4a92d5d'
 
+import braintree
+
+BRAINTREE_CONF = braintree.Configuration(
+    braintree.Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_KEY,
+    BRAINTREE_PRIVATE_KEY
+)
+
+
+# CKeditor settings
 CKEDITOR_CONFIGS = {
     'default': {
         'skin': 'moono-lisa',
@@ -224,7 +226,7 @@ CKEDITOR_CONFIGS = {
         # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
         'tabSpaces': 4,
         'extraPlugins': ','.join([
-            'uploadimage', # the upload image feature
+            'uploadimage',  # the upload image feature
             # your extra plugins here
             'div',
             'autolink',
