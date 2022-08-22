@@ -12,3 +12,6 @@ Use `eventlet` instead as below:
 # Запуск Flower
 
 `celery -A conf flower`
+
+# Запуск WeasyPrint
+Запуск оболочки MSYS2. В ней  
