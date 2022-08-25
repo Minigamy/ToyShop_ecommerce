@@ -147,6 +147,14 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
+
+# Redis Configuration
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 1
+
+
+
 # Настройка отправки писем через SMTP сервер.
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mail.ru'

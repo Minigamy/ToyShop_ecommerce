@@ -1,7 +1,10 @@
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 
 from cart.forms import CartAddProductForm
 from store.models import Category, Product, Brand
+
+from .recommender import Recommender
 
 
 class Home(ListView):
@@ -57,4 +60,8 @@ class GetProduct(DetailView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = CartAddProductForm()
+        r = Recommender()
+        slug = self.request.get_full_path().replace('/product/', '').replace('/', '')
+        product = get_object_or_404(Product,slug=slug)
+        context['recommended_products'] = r.suggest_products_for([product], 4)
         return context
