@@ -91,6 +91,14 @@ Your shopping cart
 </form>
 
 
+<p class="text-right">
+    <a href="{% url 'store:home' %}" class="button light">Continue shopping</a>
+    <a href="{% url 'orders:order_create' %}" class="button">
+        Checkout
+    </a>
+</p>
+
+
 {% if recommended_products %}
 <div class="recommendations cart">
     <h3>People who bought this also bought</h3>
@@ -107,11 +115,4 @@ Your shopping cart
 {% endif %}
 
 
-
-<p class="text-right">
-    <a href="{% url 'store:home' %}" class="button light">Continue shopping</a>
-    <a href="{% url 'orders:order_create' %}" class="button">
-        Checkout
-    </a>
-</p>
 {% endblock %}

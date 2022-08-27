@@ -1,4 +1,43 @@
-# Запуск Celery 
+# Описание
+
+Разработан сайт для федеральной розничной сети магазинов детских игрушек, которая насчитывает 23 магазина по России — от Санкт-Петербурга до Владивостока.
+
+# Реализовано
+
+- регистрация\авторизация;
+- корзина, через сессии;
+- заказы;
+- асинхронные задачи с Celery, Rabbitmq;
+- подключен тестовый платежный шлюз;
+- экспорт заказов в CSV файл;
+- генерация счетов заказов в PDF;
+- система купонов (скидка);
+- рекомендации по товарам, основанные на предыдущих покупках.
+
+Стек:
+- Django
+- Braintree
+- Celery
+- django-ckeditor
+- django-crispy-forms
+- eventlet
+- flower
+- Pillow
+- requests
+- Redis
+- pdfkit
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+
+##### Запуск Celery 
 
 Celery 4.0+ does not officially support window already.
 Use `eventlet` instead as below:
@@ -9,7 +48,7 @@ Use `eventlet` instead as below:
 
 `celery -A conf worker -P eventlet`
 
-# Запуск Flower
+##### Запуск Flower
 
 `celery -A conf flower`
 
