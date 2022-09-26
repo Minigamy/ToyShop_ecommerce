@@ -37,6 +37,19 @@
 <br>
 <br>
 
+##### Запуск Redis
+
+Для запуска Redis на Windows необходимо запустить дистрибутив Линукса через cmd:
+`wsl -d Ubuntu`
+Пароль в Убунту стандартный для ПК.
+
+Потом в Убунту запускаем сервер Redis:
+`sudo service redis-server start`
+<br>
+<br>
+
+
+
 ##### Запуск Celery 
 
 Celery 4.0+ does not officially support window already.
